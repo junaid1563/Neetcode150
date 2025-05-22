@@ -25,21 +25,24 @@ public class ValidSudoku {
 				}
 			}
 		}
-		// validate grid - fix grid logic
 		for (int i = 0; i < board.length; i += 3) {
 			List<Character> gridVal = new ArrayList<>();
 			for (int row = i; row <= i + 2; row++) {
+				for (int j = 0; j < board[row].length; j += 3) {
+					for (int col = j; col <= j + 2; col++) {
+						if (gridVal.contains(board[col][row])) {
+							return false;
+						}
+						if (board[col][row] != '.') {
+							gridVal.add(board[col][row]);
+						}
+					}
 
-				for (int col = i; col <= i + 2; col++) {
-					if (gridVal.contains(board[col][row])) {
-						return false;
-					}
-					if (board[col][row] != '.') {
-						gridVal.add(board[col][row]);
-					}
 				}
+				System.out.println("grid = " + gridVal.toString());
+				gridVal = new ArrayList<>();
+
 			}
-			System.out.println("grid = " + gridVal.toString());
 
 		}
 		return true;
